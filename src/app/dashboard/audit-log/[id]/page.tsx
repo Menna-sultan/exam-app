@@ -4,8 +4,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { PageHeader } from "@/features/dashboard/components/page-header";
 import { AuditLogDetail } from "@/features/dashboard/components/audit-log/audit-log-detail";
-import { deleteAuditLog, getAuditLog } from "@/features/dashboard/apis/audit-logs";
+import { getAuditLog } from "@/features/dashboard/apis/audit-logs";
 import { auditLogTitle } from "@/features/dashboard/lib/audit-log-format";
+import { removeAuditLogAndRedirect } from "@/features/dashboard/actions/audit-log.actions";
 
 export default async function AuditLogViewPage({
   params,
@@ -18,14 +19,6 @@ export default async function AuditLogViewPage({
   const log = await getAuditLog(session.token, id);
   if (!log) notFound();
 
-  async function removeAndRedirect(entryId: string) {
-  
-    const session = await getServerSession(authOptions);
-    if (!session?.token) redirect("/login");
-    await deleteAuditLog(session.token, entryId);
-    redirect("/dashboard/audit-log");
-  }
-
   return (
     <>
       <PageHeader
@@ -35,7 +28,7 @@ export default async function AuditLogViewPage({
         ]}
       />
       <div className="p-6">
-        <AuditLogDetail log={log} deleteAction={removeAndRedirect} />
+        <AuditLogDetail log={log} deleteAction={removeAuditLogAndRedirect} />
       </div>
     </>
   );

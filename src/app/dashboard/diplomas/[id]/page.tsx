@@ -4,7 +4,8 @@ import { authOptions } from "@/auth";
 import { notFound, redirect } from "next/navigation";
 import { Ban, Pencil } from "lucide-react";
 import { PageHeader } from "@/features/dashboard/components/page-header";
-import { getDiploma, deleteDiploma } from "@/features/main/apis/diploma.api";
+import { getDiploma } from "@/features/main/apis/diploma.api";
+import { removeDiplomaAndRedirect } from "@/features/dashboard/actions/diploma.actions";
 import { DeleteConfirmationModal } from "@/shared/components/ui/delete-confirmation-modal";
 
 export default async function DiplomaViewPage({
@@ -15,14 +16,6 @@ export default async function DiplomaViewPage({
   if (!session?.token) redirect("/login");
   const diploma = await getDiploma(session.token, id);
   if (!diploma) notFound();
-
-  async function removeDiploma(id: string) {
-
-    const session = await getServerSession(authOptions);
-    if (!session?.token) redirect("/login");
-    await deleteDiploma(session.token, id);
-    redirect("/dashboard/diplomas");
-  }
 
   return (
     <>
@@ -37,7 +30,7 @@ export default async function DiplomaViewPage({
           <Pencil className="size-4" /> Edit
         </Link>
         <DeleteConfirmationModal
-          action={removeDiploma}
+          action={removeDiplomaAndRedirect}
           actionArgs={[id]}
           title="Delete this diploma?"
           description="This action is permanent and cannot be undone."

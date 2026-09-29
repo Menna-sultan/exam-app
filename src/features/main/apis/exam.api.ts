@@ -1,6 +1,7 @@
 import type { Paginated } from "@/features/dashboard/types/types";
 import type { Question } from "../types/question";
 import type { Exam, ExamInput, ExamsParams } from "../types/exam";
+import { getDiplomas } from "./diploma.api";
 
 export type { Exam, ExamInput, ExamsParams };
 export type DiplomaOption = { id: string; title: string };
@@ -36,16 +37,16 @@ async function parseResponse<T>(
 export async function getDiplomaOptions(
   token: string
 ): Promise<DiplomaOption[]> {
-  const response = await fetch(`${API_BASE}/diplomas?limit=1000`, {
-    headers: getAuthHeaders(token),
-  });
-
-  const body = await parseResponse<{ data: { id: string; title: string }[] }>(
-    response,
-    "Failed to load diploma options"
+  const firstPage = await getDiplomas(token, { page: 1, limit: 20 });
+  const remainingPages = await Promise.all(
+    Array.from({ length: firstPage.metadata.totalPages - 1 }, (_, index) =>
+      getDiplomas(token, { page: index + 2, limit: 20 })
+    )
   );
 
-  return (body.data ?? []).map(({ id, title }) => ({ id, title }));
+  return [firstPage, ...remainingPages]
+    .flatMap(({ data }) => data)
+    .map(({ id, title }) => ({ id, title }));
 }
 
 export async function getExamQuestions(

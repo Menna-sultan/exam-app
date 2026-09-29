@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { Plus } from "lucide-react";
-import { deleteDiploma, getDiplomas } from "@/features/main/apis/diploma.api";
+import { getDiplomas } from "@/features/main/apis/diploma.api";
 import { Pagination } from "@/features/dashboard/components/pagination";
 import { DiplomasFilters } from "@/features/dashboard/components/diplomas/diplomas-filters";
 import { DiplomasTable } from "@/features/dashboard/components/diplomas/diplomas-table";
 import type { Diploma } from "@/features/main/apis/diploma.api";
+import { removeDiploma } from "@/features/dashboard/actions/diploma.actions";
 
 const SORT_FIELDS = ["title", "createdAt"] as const;
 
@@ -56,14 +56,6 @@ export default async function DiplomasPage({
     immutableParam === "true" ? true : immutableParam === "false" ? false : undefined;
   const session = await getServerSession(authOptions);
   if (!session?.token) redirect("/login");
-
-  async function removeDiploma(id: string) {
-  
-    const session = await getServerSession(authOptions);
-    if (!session?.token) redirect("/login");
-    await deleteDiploma(session.token, id);
-    revalidatePath("/dashboard/diplomas");
-  }
 
   const diplomaFilters = { search: q, immutable, limit: 20 };
   const firstPage = await getDiplomas(session.token, { page: sortBy ? 1 : currentPage, ...diplomaFilters });

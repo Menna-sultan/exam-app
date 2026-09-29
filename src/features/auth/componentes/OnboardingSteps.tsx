@@ -7,7 +7,7 @@ const OnboardingSteps = ({
 }: {
   currentStep: number;
 }) => {
-  // Hide the step indicator on the very first screen (Step 1 - Email).
+
   if (currentStep === 1) return null;
 
   return (

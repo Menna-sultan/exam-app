@@ -19,7 +19,7 @@ export function ExamQuestionsTable({
   questions: ExamQuestion[];
   addHref: string;
   removeAction: (questionId: string) => Promise<void>;
-  /** The View page shows a Sort menu, the Edit page doesn't (see mockups). */
+ 
   sortable?: boolean;
 }) {
   return (

@@ -21,7 +21,7 @@ export default function AuthSideSection() {
 
       
         <div className="flex flex-col gap-24 ">
-          <h1 className="font-sans text-4xl  font-bold text-gray-800 leading-none tracking-normal align-middle ">
+          <h1 className="font-sans text-4xl  font-bold text-gray-800 leading-12 tracking-normal align-middle ">
             Empower your learning journey with our smart exam platform.
           </h1>
 

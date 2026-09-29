@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
@@ -9,12 +8,14 @@ import { AuditLogFilters } from "@/features/dashboard/components/audit-log/audit
 import { AuditLogTable } from "@/features/dashboard/components/audit-log/audit-log-table";
 import { ClearAuditLogsButton } from "@/features/dashboard/components/audit-log/clear-audit-logs-button";
 import {
-  clearAuditLogs,
-  deleteAuditLog,
   getAdminUsers,
   getAuditLogs,
   type AuditLogsParams,
 } from "@/features/dashboard/apis/audit-logs";
+import {
+  clearAllAuditLogs,
+  removeAuditLog,
+} from "@/features/dashboard/actions/audit-log.actions";
 
 type SearchParams = {
   page?: string;
@@ -45,26 +46,23 @@ export default async function AuditLogPage({
   const session = await getServerSession(authOptions);
   if (!session?.token) redirect("/login");
 
-  const [logs, users] = await Promise.all([
+  const [logs, firstUsersPage] = await Promise.all([
     getAuditLogs(session.token, params),
-    getAdminUsers(session.token, { limit: 100 }),
+    getAdminUsers(session.token),
   ]);
-
-  async function removeEntry(id: string) {
-  
-    const session = await getServerSession(authOptions);
-    if (!session?.token) redirect("/login");
-    await deleteAuditLog(session.token, id);
-    revalidatePath("/dashboard/audit-log");
-  }
-
-  async function clearAll() {
-   
-    const session = await getServerSession(authOptions);
-    if (!session?.token) redirect("/login");
-    await clearAuditLogs(session.token);
-    revalidatePath("/dashboard/audit-log");
-  }
+  const remainingUserPages = await Promise.all(
+    Array.from(
+      { length: firstUsersPage.metadata.totalPages - 1 },
+      (_, index) =>
+        getAdminUsers(session.token, {
+          page: index + 2,
+          limit: firstUsersPage.metadata.limit,
+        })
+    )
+  );
+  const users = [firstUsersPage, ...remainingUserPages].flatMap(
+    (result) => result.data
+  );
 
   // Keep filters/sort in the URL when the pager changes page.
   const query: Record<string, string> = {};
@@ -87,11 +85,11 @@ export default async function AuditLogPage({
             pageSize={logs.metadata.limit}
             query={query}
           />
-          <ClearAuditLogsButton action={clearAll} />
+          <ClearAuditLogsButton action={clearAllAuditLogs} />
         </div>
 
         <AuditLogFilters
-          users={users.data}
+          users={users}
           defaults={{
             category: sp.category,
             action: sp.action,
@@ -101,7 +99,7 @@ export default async function AuditLogPage({
           }}
         />
 
-        <AuditLogTable items={logs.data} deleteAction={removeEntry} />
+        <AuditLogTable items={logs.data} deleteAction={removeAuditLog} />
       </div>
     </>
   );

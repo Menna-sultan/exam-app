@@ -5,7 +5,8 @@ import { ExamRowActions } from "./exam-row-actions";
 import { SortMenu, type SortOption } from "../sort-menu";
 import type { Exam } from "@/features/main/apis/exam.api";
 
-const cols = "flex items-center";
+const cols = "grid grid-cols-[100px_1fr_220px_160px_80px] items-center";
+
 const sortOptions: SortOption[] = [
   { label: "Title", order: "desc", kind: "text", params: { sortBy: "title", sortOrder: "desc" } },
   { label: "Title", order: "asc", kind: "text", params: { sortBy: "title", sortOrder: "asc" } },
@@ -24,17 +25,15 @@ export function ExamsTable({
 }) {
   return (
     <div className="bg-white">
-    <div className={`${cols} bg-blue-600 px-4 py-2.5 text-sm font-medium text-white`}>
-  <div className="w-24">Image</div>
-  <div className="flex-1">Title</div>
-  <div className="w-56">Diploma</div>
-  <div className="w-40">No. of Questions</div>
-  <div className="w-20">
-    <div className="flex justify-end">
-      <SortMenu options={sortOptions} />
-    </div>
-  </div>
-</div>
+      <div className={`${cols} bg-blue-600 px-4 py-2.5 text-sm font-medium text-white`}>
+        <span>Image</span>
+        <span>Title</span>
+        <span>Diploma</span>
+        <span>No. of Questions</span>
+        <div className="flex justify-end">
+          <SortMenu options={sortOptions} />
+        </div>
+      </div>
 
       {items.length === 0 && (
         <p className="px-4 py-10 text-center text-sm text-gray-400">No exams found.</p>
