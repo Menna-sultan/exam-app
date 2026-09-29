@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-import { RegisterFormData } from '../types/register.types';
+import { RegisterFormData } from '../types/register';
 
 type RegisterContextType = {
   formData: RegisterFormData;

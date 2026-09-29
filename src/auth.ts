@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-import { login } from "./features/auth/apis/auth.api";
+import { login } from "./features/auth/apis/login.api";
 import { loginSchema } from "./features/auth/schemes/login.schema";
 
 export const authOptions: NextAuthOptions = {

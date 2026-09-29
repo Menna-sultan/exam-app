@@ -4,7 +4,7 @@ import React from "react";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import type { RegisterFormData } from "@/features/auth/types/register.types";
+import type { RegisterFormData } from "@/features/auth/types/register";
 import { Eye, EyeOff } from "lucide-react";
 type StepErrors = Partial<Record<keyof RegisterFormData, string>>;
 

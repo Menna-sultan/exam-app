@@ -10,7 +10,7 @@ export type ForgotPasswordBody = {
 
 export type ForgotPasswordResponse = {
   message: string;
-  resetToken?: string; // التوكن الذي يرجعه السيرفر
+  resetToken?: string;
 };
 
 export type ResetPasswordBody = {
@@ -23,7 +23,7 @@ export type ResetPasswordResponse = {
   message: string;
 };
 
-// --- Helpers (نفس الموجودة في ملف الـ Register لديكِ) ---
+// --- Helpers ---
 
 const safeParseJson = <T,>(text: string): T | null => {
   const trimmed = text.trim();
@@ -38,9 +38,6 @@ const safeParseJson = <T,>(text: string): T | null => {
 
 // --- API Functions ---
 
-/**
- * طلب إرسال رابط/كود إعادة تعيين كلمة المرور
- */
 export const forgotPassword = async (
   body: ForgotPasswordBody
 ): Promise<IApiResponse<ForgotPasswordResponse>> => {
@@ -72,9 +69,6 @@ export const forgotPassword = async (
   };
 };
 
-/**
- * تنفيذ إعادة تعيين كلمة المرور باستخدام التوكن
- */
 export const resetPassword = async (
   body: ResetPasswordBody
 ): Promise<IApiResponse<ResetPasswordResponse>> => {

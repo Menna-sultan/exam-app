@@ -1,6 +1,3 @@
-// يعني بنقول:
-
-// ضيف معلومات إضافية لـ Session اللي أنت أصلاً عاملها
 import "next-auth"
 import {user as UserType} from "./user"
 

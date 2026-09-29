@@ -1,3 +1,5 @@
+import type { User } from "./user";
+
 export type RegisterStepId = 1 | 2 | 3 | 4;
 
 export type RegisterFormData = {
@@ -32,3 +34,27 @@ export type RegisterOtpData = {
   otp: string;
 };
 
+export type SendEmailVerificationBody = {
+  email: string;
+};
+
+export type SendEmailVerificationResponse = {
+  email?: string;
+};
+
+export type ConfirmEmailVerificationBody = {
+  email: string;
+  code: string;
+};
+
+export type ConfirmEmailVerificationResponse = {
+  email?: string;
+  verified?: boolean;
+};
+
+export type RegisterBody = Omit<RegisterFormData, "otp">;
+
+export type RegisterResponse = {
+  user: User;
+  token: string;
+};

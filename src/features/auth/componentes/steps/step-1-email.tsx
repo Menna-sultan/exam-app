@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import type { RegisterFormData } from "@/features/auth/types/register.types";
+import type { RegisterFormData } from "@/features/auth/types/register";
 
 
 type StepErrors = Partial<Record<keyof RegisterFormData, string>>;
@@ -55,7 +55,7 @@ export default function StepEmail({ values, errors, onChange, loading, onNext }:
         </Field>
       </FieldGroup>
 
-      {loading && <div className="mt-4 h-10 w-full rounded-xl bg-gray-100" />}
+  
 
       <div className="mt-10">
         <Button
@@ -83,9 +83,7 @@ export default function StepEmail({ values, errors, onChange, loading, onNext }:
 
        
 
-      {/* <p className="text-xs text-gray-500 mt-3">
-        We’ll send a one-time OTP to verify your email.
-      </p> */}
+    
     </div>
   );
 }

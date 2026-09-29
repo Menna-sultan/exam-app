@@ -1,14 +1,13 @@
 'use client'
 
 import React from "react";
-import { ArrowLeft } from "lucide-react"; // تأكدي من تثبيت lucide-react
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import Link from "next/link";
 
 interface Props {
   email: string;
   onBack: () => void;
-  // إذا كنتِ ستضيفين حقل الـ OTP هنا:
   otp?: string;
   setOtp?: (val: string) => void;
   onVerify?: () => void;
@@ -20,7 +19,6 @@ export function OtpStep({ email, onBack }: Props) {
   return (
     <div className="flex flex-col items-start w-full max-w-md mx-auto animate-in fade-in duration-500">
       
-      {/* زر الرجوع - المربع الصغير */}
       <Button
         variant="outline"
         size="icon"
@@ -30,12 +28,10 @@ export function OtpStep({ email, onBack }: Props) {
         <ArrowLeft className="h-5 w-5 text-gray-600" />
       </Button>
 
-      {/* العنوان الرئيسي */}
       <h2 className="text-3xl font-bold text-[#111827] leading-tight mb-6">
         Password Reset Sent
       </h2>
 
-      {/* نصوص التعليمات */}
       <div className="space-y-6 text-[#4B5563] font-mono text-sm leading-relaxed">
         <p>
           We have sent a password reset link to:{" "}
@@ -51,7 +47,6 @@ export function OtpStep({ email, onBack }: Props) {
         </p>
       </div>
 
-      {/* Footer - رابط إنشاء حساب */}
       <p className="mt-12 text-sm font-mono text-gray-500">
         Don’t have an account?{" "}
         <Link href="/register" className="text-blue-600 hover:underline">
@@ -59,10 +54,6 @@ export function OtpStep({ email, onBack }: Props) {
         </Link>
       </p>
 
-      {/* 
-         ملاحظة: إذا أردتِ إضافة حقل إدخال الكود (OTP Input) 
-         يمكنك وضعه هنا تحت النصوص
-      */}
     </div>
   );
 }

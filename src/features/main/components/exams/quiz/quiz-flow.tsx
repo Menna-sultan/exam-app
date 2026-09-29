@@ -190,7 +190,6 @@ export function QuizFlow({
     />
   </div>
 
-  {/* الخط الفاصل الرأسي */}
   <div className="h-8 w-px shrink-0 bg-gray-200" />
 
   <div className="relative flex h-16 w-16 shrink-0 items-center justify-center">

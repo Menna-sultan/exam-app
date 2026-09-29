@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from "react";
+import  { useMemo, useState } from "react";
 
 import {
   registerEmailSchema,
@@ -11,21 +11,18 @@ import {
 import {
   confirmEmailVerification,
   sendEmailVerification,
-} from "@/features/auth/apis/auth.api";
+} from "@/features/auth/apis/register.api";
 
 import useRegister from "@/features/auth/hooks/useRegister";
 
-import {
-  RegisterFormData,
-  RegisterStepId,
-  registerInitialValues,
-} from "@/features/auth/types/register.types";
+
 
 import StepEmail from "@/features/auth/componentes/steps/step-1-email";
 import StepOtp from "@/features/auth/componentes/steps/step-2-otp";
 import StepProfile from "@/features/auth/componentes/steps/step-3-profile";
 import StepPassword from "@/features/auth/componentes/steps/step-4-password";
 import OnboardingSteps from "@/features/auth/componentes/OnboardingSteps";
+import { RegisterFormData, registerInitialValues, RegisterStepId } from "../../types/register";
 
 type StepErrors = Partial<Record<keyof RegisterFormData, string>>;
 
@@ -48,11 +45,7 @@ function pickStepErrors(step: RegisterStepId, values: RegisterFormData): StepErr
   }, {} as StepErrors);
 }
 
-/**
- * Maps a raw backend error message to the field/step it belongs to,
- * so the user is dropped back on the step that actually needs fixing
- * instead of always seeing the error on the last step.
- */
+
 function mapBackendError(message: string): { step?: RegisterStepId; field?: keyof RegisterFormData } {
   const normalized = message.toLowerCase();
 

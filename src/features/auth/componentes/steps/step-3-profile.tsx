@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react"
-import type { RegisterFormData } from "@/features/auth/types/register.types"
+import type { RegisterFormData } from "@/features/auth/types/register"
 import { Input } from "@/shared/components/ui/input"
 import { PhoneInput } from "@/shared/components/ui/phone-input";
 import { Button } from "@/shared/components/ui/button";

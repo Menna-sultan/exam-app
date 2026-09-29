@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/shared/components/ui/button";
-import type { RegisterFormData } from "@/features/auth/types/register.types";
+import type { RegisterFormData } from "@/features/auth/types/register";
 import { OtpResendTimer } from "./otp-resend-control";
 
 type StepErrors = Partial<Record<keyof RegisterFormData, string>>;

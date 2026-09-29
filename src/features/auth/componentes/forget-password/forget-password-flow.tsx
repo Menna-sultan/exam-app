@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useTransition, useEffect, Suspense } from "react";
+import  { useState, useTransition, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { EmailStep } from "./steps/email-step.tsx"; 
 import { OtpStep } from "./steps/otp-step";
@@ -8,14 +8,15 @@ import { ResetPasswordStep } from "./steps/reset-password-step";
 import { emailSchema, otpSchema, resetPasswordSchema } from "@/features/auth/schemes/forgetpassword.schema";
 import { forgotPassword, resetPassword } from "../../apis/forget-password.api";
 import { LoadingState } from "@/shared/components/ui/loading-state";
+import { Toast } from "@/shared/components/ui/toast";
 
-// سنستخدم مكون داخلي للتعامل مع searchParams لضمان عمل Suspense في Next.js
 function ForgetPasswordContent() {
   const searchParams = useSearchParams();
   const tokenFromUrl = searchParams.get("token");
 
   const [step, setStep] = useState<1 | 2 | 3>(tokenFromUrl ? 3 : 1);
   const [isPending, startTransition] = useTransition();
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
   
   const [values, setValues] = useState({
     email: "",
@@ -27,7 +28,6 @@ function ForgetPasswordContent() {
   
   const [errors, setErrors] = useState<any>({});
 
-  // الخطوة 1: إرسال الإيميل
   const handleSendResetLink = async () => {
     const result = emailSchema.safeParse({ email: values.email });
     if (!result.success) {
@@ -50,7 +50,6 @@ function ForgetPasswordContent() {
     });
   };
 
-  // الخطوة 2: التحقق من الـ OTP (كود يدوي)
   const handleVerifyOtp = () => {
     const result = otpSchema.safeParse({ otp: values.otp });
     if (!result.success) {
@@ -58,12 +57,11 @@ function ForgetPasswordContent() {
       return;
     }
 
-    setValues(prev => ({ ...prev, token: values.otp })); // نعتبر الكود هو التوكن
+    setValues(prev => ({ ...prev, token: values.otp }));
     setStep(3);
     setErrors({});
   };
 
-  // الخطوة 3: تعيين كلمة السر الجديدة
   const handleResetPassword = async () => {
     const result = resetPasswordSchema.safeParse({
       newPassword: values.newPassword,
@@ -88,8 +86,10 @@ function ForgetPasswordContent() {
       });
 
       if (res.status) {
-        alert("Password reset successfully!");
-        window.location.href = "/login";
+        setShowSuccessToast(true);
+        window.setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
       } else {
         setErrors({ form: res.message });
       }
@@ -98,9 +98,14 @@ function ForgetPasswordContent() {
 
   return (
     <div className="w-full flex flex-col gap-4">
+      <Toast
+        message="Password reset successfully!"
+        show={showSuccessToast}
+        role="status"
+      />
       <h2 className="text-2xl font-bold text-gray-800 leading-tight">
         {step === 1 && "Forgot Password"}
-        {step === 2 && "Verification Sent"}
+        {step === 2 && " "}
         {step === 3 && "Create a New Password"}
       </h2>
 
@@ -139,7 +144,6 @@ function ForgetPasswordContent() {
   );
 }
 
-// المكون الرئيسي المغلف بـ Suspense (مهم جداً في Next.js عند استخدام useSearchParams)
 export default function ForgetPasswordFlow() {
   return (
     <Suspense fallback={<LoadingState />}>

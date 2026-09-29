@@ -11,7 +11,7 @@ export function PageHeader({
   crumbs: Crumb[];
   title?: string;
   subtitle?: React.ReactNode; // small gray line under the title
-  children?: React.ReactNode; // الأزرار
+  children?: React.ReactNode;
 }) {
   return (
     <header className="bg-white">

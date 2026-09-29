@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from "react";
-import { Eye, EyeOff } from "lucide-react"; // تأكدي من تثبيت lucide-react
+import  { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/shared/components/ui/field";
@@ -15,13 +15,11 @@ interface Props {
 }
 
 export function ResetPasswordStep({ values, setValues, onReset, errors, isLoading }: Props) {
-  // حالة إظهار وإخفاء كلمة السر
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <div className="bg-white animate-in fade-in duration-500">
-      {/* العناوين كما في المثال الذي أرفقته */}
      <h3 className="font-mono text-gray-500 text-sm mb-10">
      Create a new strong password for your account.
       </h3>
@@ -29,7 +27,6 @@ export function ResetPasswordStep({ values, setValues, onReset, errors, isLoadin
      
 
         <FieldGroup className="mt-10">
-          {/* الحقل الأول: كلمة السر الجديدة */}
           <Field data-invalid={!!errors.newPassword}>
             <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
             <div className="relative">
@@ -56,7 +53,6 @@ export function ResetPasswordStep({ values, setValues, onReset, errors, isLoadin
             )}
           </Field>
 
-          {/* الحقل الثاني: تأكيد كلمة السر */}
           <Field data-invalid={!!errors.confirmPassword} className="mt-8">
             <FieldLabel htmlFor="confirmPassword">Confirm New Password</FieldLabel>
             <div className="relative">
@@ -84,14 +80,12 @@ export function ResetPasswordStep({ values, setValues, onReset, errors, isLoadin
           </Field>
         </FieldGroup>
 
-        {/* عرض خطأ عام من السيرفر إذا وجد */}
         {errors.form && (
           <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg text-red-600 text-xs font-mono">
             {errors.form}
           </div>
         )}
 
-        {/* الزر كما في التصميم المطلوب */}
         <div className="flex items-center mt-12 pt-2">
           <Button
             type="button"

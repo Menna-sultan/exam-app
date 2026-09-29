@@ -1,23 +1,24 @@
 import { API_BASE, HEADERS } from "@/shared/constants/api.constant";
-import { IApiResponse } from "@/shared/types/api";
+import type { IApiResponse } from "@/shared/types/api";
+import type {
+  ConfirmEmailVerificationBody,
+  ConfirmEmailVerificationResponse,
+  RegisterBody,
+  RegisterResponse,
+  SendEmailVerificationBody,
+  SendEmailVerificationResponse,
+} from "../types/register";
 
-export type SendEmailVerificationBody = {
-  email: string;
+export type {
+  ConfirmEmailVerificationBody,
+  ConfirmEmailVerificationResponse,
+  RegisterBody,
+  RegisterResponse,
+  SendEmailVerificationBody,
+  SendEmailVerificationResponse,
 };
 
-export type ConfirmEmailVerificationBody = {
-  email: string;
-  code: string;
-};
 
-export type SendEmailVerificationResponse = {
-  email?: string;
-};
-
-export type ConfirmEmailVerificationResponse = {
-  email?: string;
-  verified?: boolean;
-};
 
 const safeParseJson = <T,>(text: string): T | null => {
   const trimmed = text.trim();
@@ -64,33 +65,6 @@ export const sendEmailVerification = async (
   };
 };
 
-export type RegisterBody = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-};
-
-export type RegisterResponse = {
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    phone: string;
-    firstName: string;
-    lastName: string;
-    profilePhoto: string;
-    emailVerified: boolean;
-    phoneVerified: boolean;
-    role: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-  token: string;
-};
 
 export const confirmEmailVerification = async (
   body: ConfirmEmailVerificationBody
