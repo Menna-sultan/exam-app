@@ -191,7 +191,7 @@ export function QuizFlow({
       <div className="mb-6 flex items-center gap-3">
         <Progress value={progress} className="flex-1" />
         <div
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-[10px] font-semibold ${
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold ${
             timeLow
               ? "border-red-500 text-red-600 animate-pulse"
               : "border-blue-500 text-blue-600"

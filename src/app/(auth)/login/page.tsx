@@ -6,7 +6,7 @@ export default function Page() {
     return (
       
               <main className="w-full h-full flex flex-col justify-center items-center py-12 px-4">
-                <div className="w-full max-w-[450px] mx-auto flex flex-col gap-10">
+                <div className="w-full max-w-md mx-auto flex flex-col gap-10">
         {/* Title */}
         <h2 className="font-inter text-3xl font-bold text-gray-800  text-left">
           Login

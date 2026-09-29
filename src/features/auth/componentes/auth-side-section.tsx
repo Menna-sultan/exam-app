@@ -3,13 +3,13 @@ import { Code2, Brain, BookOpen, RectangleEllipsis  } from "lucide-react";
 
 export default function AuthSideSection() {
   return (
-    <section className="h-full w-full bg-[#EFF6FFBF] p-8 lg:p-12 flex flex-col justify-between min-h-[400px] lg:min-h-screen relative overflow-hidden select-none">
-      {/* الخلفية المضيئة المموّهة */}
-      <div className="absolute top-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-blue-200/50 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-sky-200/40 blur-3xl pointer-events-none" />
+    <section className="h-full w-full bg-[#EFF6FFBF] p-8 lg:p-12 flex flex-col justify-between min-h-100 lg:min-h-screen relative overflow-hidden select-none">
+     
+      <div className="absolute top-[-10%] right-[-10%] w-88 h-88 rounded-full bg-blue-200/50 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-72 h-72  rounded-full bg-sky-200/40 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 flex flex-col h-full justify-between gap-12 lg:gap-0">
-        {/* الشعار - Header Logo */}
+       
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded bg-[#1b61ff] flex items-center justify-center text-white shadow-sm shadow-[#1b61ff]/25">
             <Code2 className="w-5 h-5 stroke-[2.5]" />
@@ -19,15 +19,14 @@ export default function AuthSideSection() {
           </span>
         </div>
 
-        {/* العنوان البارز - Hero Section */}
+      
         <div className="flex flex-col gap-24 ">
           <h1 className="font-sans text-4xl  font-bold text-gray-800 leading-none tracking-normal align-middle ">
             Empower your learning journey with our smart exam platform.
           </h1>
 
-          {/* قائمة المزايا - Features */}
+          
           <div className="flex flex-col gap-7">
-            {/* الميزة الأولى */}
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-8 h-8 border border-1.5 border-[#155DFC] flex items-center justify-center text-[#155DFC] shadow-sm">
                 <Brain className="w-4 h-4 stroke-[1.8]" />
@@ -42,7 +41,6 @@ export default function AuthSideSection() {
               </div>
             </div>
 
-            {/* الميزة الثانية */}
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-8 h-8 border border-1.5 border-[#155DFC] flex items-center justify-center text-[#155DFC] shadow-sm">
                 <BookOpen className="w-4 h-4 stroke-[1.8]" />
@@ -57,7 +55,6 @@ export default function AuthSideSection() {
               </div>
             </div>
 
-            {/* الميزة الثالثة */}
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-8 h-8 border border-1.5 border-[#155DFC] flex items-center justify-center text-[#155DFC] shadow-sm">
                 <RectangleEllipsis  className="w-4 h-4 stroke-[1.8]" />

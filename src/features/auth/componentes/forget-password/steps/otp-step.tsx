@@ -31,7 +31,7 @@ export function OtpStep({ email, onBack }: Props) {
       </Button>
 
       {/* العنوان الرئيسي */}
-      <h2 className="text-[32px] font-bold text-[#111827] leading-tight mb-6">
+      <h2 className="text-3xl font-bold text-[#111827] leading-tight mb-6">
         Password Reset Sent
       </h2>
 

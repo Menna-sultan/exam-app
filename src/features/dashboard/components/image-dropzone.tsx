@@ -22,7 +22,7 @@ export function ImageDropzone({ name, defaultUrl }: { name: string; defaultUrl?:
           setFile(file);
         }
       }}
-      className="relative flex h-[88px] items-center border px-6"
+      className="relative flex h-22 items-center border px-6"
     >
       {preview ? (
         // eslint-disable-next-line @next/next/no-img-element
