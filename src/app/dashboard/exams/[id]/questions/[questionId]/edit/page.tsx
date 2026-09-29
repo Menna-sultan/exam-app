@@ -25,9 +25,7 @@ export default async function EditQuestionPage({
   if (!question) notFound();
 
   async function saveQuestion(_examId: string, payloads: QuestionDraftInput[]) {
-    "use server";
-    // The API doesn't let an update move a question to a different exam,
-    // so the exam picked in the form (_examId) is ignored here.
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await updateQuestion(session.token, questionId, payloads[0]);

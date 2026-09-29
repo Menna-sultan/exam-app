@@ -9,7 +9,7 @@ import { createDiploma as createDiplomaRequest } from "@/features/main/apis/dipl
 import { uploadImage } from "@/features/main/apis/upload.api";
 
 async function createDiploma(formData: FormData) {
-  "use server";
+ 
   const session = await getServerSession(authOptions);
   if (!session?.token) redirect("/login");
   const imageFile = formData.get("image");

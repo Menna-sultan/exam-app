@@ -5,6 +5,7 @@ import type { Exam, ExamInput, ExamsParams } from "../types/exam";
 export type { Exam, ExamInput, ExamsParams };
 export type DiplomaOption = { id: string; title: string };
 export type ExamOption = { id: string; title: string };
+export type ExamQuestion = { id: string; title: string };
 
 const API_BASE = process.env.NEXT_PUBLIC_API!;
 
@@ -50,17 +51,20 @@ export async function getDiplomaOptions(
 export async function getExamQuestions(
   token: string,
   examId: string
-): Promise<Question[]> {
+): Promise<ExamQuestion[]> {
   const response = await fetch(`${API_BASE}/questions/exam/${examId}`, {
     headers: getAuthHeaders(token),
   });
 
-  const body = await parseResponse<{ questions: Question[] }>(
+  const body = await parseResponse<{ questions: Array<{ id: string; text: string }> }>(
     response,
     "Failed to load exam questions"
   );
 
-  return body.questions;
+  return (body.questions ?? []).map((question) => ({
+    id: question.id,
+    title: question.text,
+  }));
 }
 
 export async function examInputFromForm(

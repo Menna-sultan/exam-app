@@ -19,7 +19,7 @@ export default async function AuditLogViewPage({
   if (!log) notFound();
 
   async function removeAndRedirect(entryId: string) {
-    "use server";
+  
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteAuditLog(session.token, entryId);

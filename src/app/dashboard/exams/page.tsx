@@ -56,7 +56,7 @@ export default async function ExamsPage({
   if (!session?.token) redirect("/login");
 
   async function removeExam(id: string) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteExam(session.token, id);

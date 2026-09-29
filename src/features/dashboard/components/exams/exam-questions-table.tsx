@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
+import type { ExamQuestion } from "@/features/main/apis/exam.api";
 import { QuestionRowActions } from "./question-row-actions";
 import { SortMenu, type SortOption } from "../sort-menu";
-import type { ExamQuestion } from "@/features/main/apis/exam.api";
 
 const sortOptions: SortOption[] = [
   { label: "Title", order: "desc", kind: "text", params: { qsort: "desc" } },

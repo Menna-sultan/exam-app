@@ -33,7 +33,7 @@ export default async function ExamViewPage({
   if (!exam) notFound();
 
   async function removeExam(id: string) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteExam(session.token, id);
@@ -41,7 +41,7 @@ export default async function ExamViewPage({
   }
 
   async function removeQuestion(questionId: string) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteQuestion(session.token, questionId);
@@ -50,7 +50,7 @@ export default async function ExamViewPage({
 
   const dir = qsort === "asc" ? 1 : qsort === "desc" ? -1 : 0;
   const questions = [...examQuestions];
-  if (dir) questions.sort((a, b) => a.text.localeCompare(b.text) * dir);
+  if (dir) questions.sort((a, b) => a.title.localeCompare(b.title) * dir);
 
   return (
     <>

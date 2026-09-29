@@ -13,8 +13,7 @@ import {
 import { ExamForm } from "@/features/dashboard/components/exams/examform";
 
 async function createExam(formData: FormData) {
-  "use server";
-  const session = await getServerSession(authOptions);
+ const session = await getServerSession(authOptions);
   if (!session?.token) redirect("/login");
   await createExamRequest(session.token, await examInputFromForm(session.token, formData));
   redirect("/dashboard/exams");

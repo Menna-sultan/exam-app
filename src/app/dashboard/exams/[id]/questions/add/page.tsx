@@ -25,7 +25,7 @@ export default async function AddQuestionPage({
   if (!exam) notFound();
 
   async function saveQuestions(selectedExamId: string, payloads: QuestionDraftInput[]) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await createQuestionsBulk(session.token, selectedExamId, payloads);

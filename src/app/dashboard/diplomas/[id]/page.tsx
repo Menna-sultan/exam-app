@@ -17,7 +17,7 @@ export default async function DiplomaViewPage({
   if (!diploma) notFound();
 
   async function removeDiploma(id: string) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteDiploma(session.token, id);

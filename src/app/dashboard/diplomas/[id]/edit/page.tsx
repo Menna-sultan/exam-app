@@ -18,7 +18,7 @@ export default async function EditDiplomaPage({
   if (!diploma) notFound();
 
   async function updateDiploma(formData: FormData) {
-    "use server";
+  
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     const imageFile = formData.get("image");

@@ -34,7 +34,7 @@ export default async function EditExamPage({
   if (!exam) notFound();
 
   async function updateExam(formData: FormData) {
-    "use server";
+   
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await updateExamRequest(session.token, id, await examInputFromForm(session.token, formData));
@@ -42,7 +42,7 @@ export default async function EditExamPage({
   }
 
   async function removeQuestion(questionId: string) {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteQuestion(session.token, questionId);

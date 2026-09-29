@@ -29,7 +29,11 @@ export type SubmissionAnalytics = {
   questionText: string;
   selectedAnswer: unknown;
   isCorrect: boolean;
-  correctAnswer: unknown;
+  correctAnswer?: {
+    id?: string;
+    text?: string;
+    [key: string]: unknown;
+  } | null;
 };
 
 export type SubmitExamInput = {

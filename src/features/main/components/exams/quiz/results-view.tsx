@@ -44,7 +44,10 @@ export function ResultsView({
   // questionId -> id of the correct answer, as graded by the server.
   const correctByQuestion = new Map(
     Array.isArray(analytics)
-      ? analytics.map((a) => [a.questionId, a.correctAnswer?.id])
+      ? analytics.map((a) => {
+          const correctAnswer = a.correctAnswer as { id?: string } | null | undefined;
+          return [a.questionId, correctAnswer?.id];
+        })
       : []
   );
 

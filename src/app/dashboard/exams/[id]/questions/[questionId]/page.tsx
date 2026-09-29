@@ -21,7 +21,7 @@ export default async function QuestionViewPage({
   const examTitle = question.exam?.title ?? "Exam";
 
   async function removeQuestion() {
-    "use server";
+
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteQuestion(session.token, questionId);

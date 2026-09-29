@@ -51,7 +51,7 @@ export default async function AuditLogPage({
   ]);
 
   async function removeEntry(id: string) {
-    "use server";
+  
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await deleteAuditLog(session.token, id);
@@ -59,7 +59,7 @@ export default async function AuditLogPage({
   }
 
   async function clearAll() {
-    "use server";
+   
     const session = await getServerSession(authOptions);
     if (!session?.token) redirect("/login");
     await clearAuditLogs(session.token);
